@@ -35,7 +35,7 @@ router.post('/register', (req, res) => {
                     avatar,
                     password: req.body.password
                 });
-
+                //console.log(req.body);
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
@@ -71,17 +71,19 @@ router.post('/login', (req, res) => {
                         //User matched
                         const payload = { id: user.id, name: user.name, avatar: user.avatar };
                         //Sign token
-                        jwt.sign(payload,
+                        jwt.sign(
+                            payload,
                             keys.secretOrKey,
                             { expiresIn: 3600 },
-                            () => {
+                            (err, token) => {
                                 res.json({
                                     success: true,
                                     token: 'Bearer ' + token
                                 })
-                            });
+                            }
+                        );
                     } else {
-                        return res.status(400).json({password: 'Password incorrect'})
+                        return res.status(400).json({password: 'Password incorrect'});
                     }
                 })
         });
