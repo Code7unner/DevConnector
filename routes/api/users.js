@@ -29,6 +29,7 @@ router.post('/register', (req, res) => {
         return res.status(400).json(errors);
     }
 
+    //Searching exist user's or creating new one
     User.findOne({ email: req.body.email })
         .then((user) => {
             if (user) {
@@ -41,13 +42,15 @@ router.post('/register', (req, res) => {
                     d: 'mm'
                 });
 
+                //Create new user
                 const newUser = new User({
                     name: req.body.name,
                     email: req.body.email,
                     avatar,
                     password: req.body.password
                 });
-                //console.log(req.body);
+
+                //Crypting new user's password
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
