@@ -48,9 +48,9 @@ module.exports = function validateProfileInput(data) {
         }
     }
 
-    if (!isEmpty(data.hh)) {
-        if (!Validator.isURL(data.hh)) {
-            errors.hh = 'Not a valid URL';
+    if (!isEmpty(data.youtube)) {
+        if (!Validator.isURL(data.youtube)) {
+            errors.youtube = 'Not a valid URL';
         }
     }
 

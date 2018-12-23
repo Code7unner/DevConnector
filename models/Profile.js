@@ -105,7 +105,7 @@ const ProfileSchema = new Schema({
         facebook: {
             type: String
         },
-        hh: {
+        youtube: {
             type: String
         },
         instagram: {
