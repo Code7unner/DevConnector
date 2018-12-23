@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { registerUser } from "../../actions/authActions";
+import { registerUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
 class Register extends Component {
     constructor() {
         super();
-
         this.state = {
             name: '',
             email: '',
@@ -21,6 +20,12 @@ class Register extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({ errors: nextProps.errors });
@@ -28,7 +33,7 @@ class Register extends Component {
     }
 
     onChange(e) {
-        this.setState({[e.target.name]: e.target.value});
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     onSubmit(e) {
@@ -45,8 +50,7 @@ class Register extends Component {
     }
 
     render() {
-
-        const { errors } =  this.state;
+        const { errors } = this.state;
 
         return (
             <div className="register">
@@ -54,7 +58,9 @@ class Register extends Component {
                     <div className="row">
                         <div className="col-md-8 m-auto">
                             <h1 className="display-4 text-center">Sign Up</h1>
-                            <p className="lead text-center">Create your DevConnector account</p>
+                            <p className="lead text-center">
+                                Create your DevConnector account
+                            </p>
                             <form noValidate onSubmit={this.onSubmit}>
                                 <TextFieldGroup
                                     placeholder="Name"
@@ -70,7 +76,7 @@ class Register extends Component {
                                     value={this.state.email}
                                     onChange={this.onChange}
                                     error={errors.email}
-                                    info='This site uses Gravatar so if you want a profile image, use a Gravatar email'
+                                    info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                                 />
                                 <TextFieldGroup
                                     placeholder="Password"
@@ -88,13 +94,13 @@ class Register extends Component {
                                     onChange={this.onChange}
                                     error={errors.password2}
                                 />
-                                <input type="submit" className="btn btn-info btn-block mt-4"/>
+                                <input type="submit" className="btn btn-info btn-block mt-4" />
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
