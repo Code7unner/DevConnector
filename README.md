@@ -38,9 +38,9 @@ https://devsconnector.herokuapp.com
 
 ### Authors
 
-Cherbadzhi Maxim
-Tereschenko Oleg
-Pysin Yurii
+* Cherbadzhi Maxim
+* Tereschenko Oleg
+* Pysin Yurii
 
 ### Version
 
